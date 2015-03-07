@@ -13,4 +13,6 @@ public interface CPConstants {
 	String CSSROOTURL = "css/";
 	
 	String ROOTPAGE = "/";
+	String TILES = "/WEB-INF/tiles/tiles-def.xml";
+	
 }

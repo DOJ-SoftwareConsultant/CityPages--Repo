@@ -9,6 +9,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+
+import com.doj.citypages.utils.CPConstants;
 
 /**
  * @author Dinesh.Rajput
@@ -19,11 +23,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = { "com.doj.citypages" })
 public class CityPagesMvcConfig extends WebMvcConfigurerAdapter{
 	
+	
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/").setCachePeriod(31556926);
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/").setCachePeriod(31556926);
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/").setCachePeriod(31556926);
+      
     }
  
     @Override
@@ -31,13 +37,13 @@ public class CityPagesMvcConfig extends WebMvcConfigurerAdapter{
         configurer.enable();
     }
  
-    @Bean
+   /* @Bean
     public InternalResourceViewResolver jspViewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
         bean.setPrefix("/WEB-INF/views/");
         bean.setSuffix(".jsp");
         return bean;
-    }
+    }*/
  
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource getMessageSource() {
@@ -46,4 +52,15 @@ public class CityPagesMvcConfig extends WebMvcConfigurerAdapter{
         resource.setDefaultEncoding("UTF-8");
         return resource;
     }
+    @Bean
+	public TilesViewResolver configureTilesViewResolver() {
+		return new TilesViewResolver();
+	}
+	
+	@Bean
+	public TilesConfigurer configureTilesConfigurer() {
+		TilesConfigurer configurer = new TilesConfigurer();
+		configurer.setDefinitions(new String[] {CPConstants.TILES});
+		return configurer;
+	}
 }
