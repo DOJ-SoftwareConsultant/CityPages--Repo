@@ -12,4 +12,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="newUser" extends="mainTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/newUser.jsp"></put-attribute>
+	</definition>
+	
 </tiles-definitions>

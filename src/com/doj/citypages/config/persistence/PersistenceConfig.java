@@ -7,83 +7,76 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages="com.doj.citypages.repositories")
-public class PersistenceConfig implements TransactionManagementConfigurer {
+@PropertySource("classpath:application.properties")
+@EnableJpaRepositories(basePackages = "com.doj.citypages.repositories")
+public class PersistenceConfig {
 
 	@Autowired
 	private Environment env;
-	
-	@Value("${init-db:false}") 
-	private String initDatabase;
 
-	
+	public PersistenceConfig() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Bean
-	@Override
-	public PlatformTransactionManager annotationDrivenTransactionManager() {
-		EntityManagerFactory factory = entityManagerFactory().getObject();
-		return new JpaTransactionManager(factory);
+	public DataSource datasource() {
+		BasicDataSource dataSource = new BasicDataSource();
+		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+		dataSource.setUrl(env.getProperty("jdbc.url"));
+		dataSource.setUsername("jdbc.username");
+		dataSource.setPassword("jdbc.password");
+		return dataSource;
 	}
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+		final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(datasource());
+		em.setPackagesToScan("com.doj.citypags.entities");
 
-		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		vendorAdapter.setGenerateDdl(Boolean.TRUE);
-		vendorAdapter.setShowSql(Boolean.TRUE);
+		final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(additionalProperties());
+		return em;
+	}
 
-		factory.setDataSource(dataSource());
-		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("com.doj.citypages.entities");
+	@Bean
+	public PlatformTransactionManager transactionManager(
+			final EntityManagerFactory emf) {
+		final JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
+		return transactionManager;
+	}
 
-		Properties jpaProperties = new Properties();
-		jpaProperties.put("hibernate.hbm2ddl.auto",
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	final Properties additionalProperties() {
+		final Properties hibernateProperties = new Properties();
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto",
 				env.getProperty("hibernate.hbm2ddl.auto"));
-		factory.setJpaProperties(jpaProperties);
-
-		factory.afterPropertiesSet();
-		factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
-		return factory;
-
-	}
-     @Bean
-	public DataSource dataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-		dataSource.setUrl(env.getProperty("jdbc.url"));
-		dataSource.setUsername(env.getProperty("jdbc.username"));
-		dataSource.setPassword(env.getProperty("jdbc.password"));
-		return dataSource;
-
-	}
-
-     @Bean
-	public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
-		System.out.println("**************************" + initDatabase);
-		DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
-		dataSourceInitializer.setDataSource(dataSource);
-		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-		//databasePopulator.addScript(new ClassPathResource("db.sql"));
-		dataSourceInitializer.setDatabasePopulator(databasePopulator);
-		dataSourceInitializer.setEnabled(Boolean.parseBoolean(initDatabase));
-		return dataSourceInitializer;
+		hibernateProperties.setProperty("hibernate.dialect",
+				env.getProperty("hibernate.dialect"));
+		hibernateProperties.setProperty("hibernate.show_sql",
+				env.getProperty("hibernate.show_sql"));
+		return hibernateProperties;
 	}
 
 }
