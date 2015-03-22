@@ -5,10 +5,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.doj.citypages.entities.Users;
 import com.doj.citypages.exception.UserNotFoundException;
 import com.doj.citypages.repositories.UserRepository;
 import com.doj.citypages.services.IUserService;
-import com.doj.citypags.entities.Users;
 
 @Service("userService")
 @Transactional

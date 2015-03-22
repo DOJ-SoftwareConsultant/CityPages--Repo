@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.doj.citypages.entities.Users;
 import com.doj.citypages.services.IUserService;
-import com.doj.citypags.entities.Users;
 
 @Controller
 public class LoginController {

@@ -8,8 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import com.doj.citypages.entities.Users;
 import com.doj.citypages.repositories.UserRepository;
-import com.doj.citypags.entities.Users;
 
 @Repository("userRepository")
 public class UserRepositoryImpl implements UserRepository{

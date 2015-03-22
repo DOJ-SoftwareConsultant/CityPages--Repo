@@ -1,6 +1,6 @@
 package com.doj.citypages.services;
 
-import com.doj.citypags.entities.Users;
+import com.doj.citypages.entities.Users;
 
 public interface IUserService {
 	
