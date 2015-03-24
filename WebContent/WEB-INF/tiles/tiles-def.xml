@@ -24,15 +24,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/signIn.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="product" extends="mainTemplate">
-		<put-attribute name="title" value="Product for City Pages : DOJ Software"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/product.jsp"></put-attribute>
+	<definition name="about" extends="mainTemplate">
+		<put-attribute name="title" value="About City Pages : DOJ Software"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/about.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="allproduct" extends="mainTemplate">
-		<put-attribute name="title" value="Sign Ip for City Pages : DOJ Software"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/all_products.jsp"></put-attribute>
-	</definition>
+	
 	
 	<definition name="newUser" extends="mainTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/newUser.jsp"></put-attribute>

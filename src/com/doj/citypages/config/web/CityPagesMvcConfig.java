@@ -40,13 +40,13 @@ public class CityPagesMvcConfig extends WebMvcConfigurerAdapter{
         configurer.enable();
     }
  
-   /* @Bean
+   @Bean
     public InternalResourceViewResolver jspViewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
         bean.setPrefix("/WEB-INF/views/");
         bean.setSuffix(".jsp");
         return bean;
-    }*/
+    }
  
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource getMessageSource() {

@@ -10,15 +10,18 @@
             <div class="widget-body">
               <div class="center-align">
                 <form class="form-horizontal form-signin-signup">
+                  <input type ="text" name ="fname" placeholder="First Name">
+                  <input type ="text" name ="lname" placeholder="Last Name">
                   <input type="text" name="email" placeholder="Email">
                   <input type="password" name="password" placeholder="Password">
                   <input type="password" name="password_confirmation" placeholder="Password Confirmation">
                   <div>
                     <input type="submit" value="Signup" class="btn btn-primary btn-large">
+                    <a class="btn btn-primary btn-large" href="signin.html">Signin</a>
+                    
                   </div>
                 </form>
-                <h4><i class="icon-question-sign"></i> Already have an account?</h4>
-                <a href="signin.html" class="btn btn-large bottom-space">Signin</a>
+                
                 <h4><i class="icon-thumbs-up"></i> Sign in with third party account</h4>
                 <ul class="signin-with-list">
                   <li>
@@ -39,12 +42,7 @@
                       Signin with Google
                     </a>
                   </li>
-                  <li>
-                    <a class="btn-github">
-                      <i class="icon-github icon-large"></i>
-                      Signin with Github
-                    </a>
-                  </li>
+                 
                 </ul>
               </div>
             </div>

@@ -25,6 +25,7 @@
 	<logger name="org.springframework">
 		<level value="INFO" />
 	</logger>
+	
 
 	<root level="error">
 		<appender-ref ref="STDOUT" />

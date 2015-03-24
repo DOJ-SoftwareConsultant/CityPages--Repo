@@ -1,7 +1,7 @@
 <%@include file="/WEB-INF/templates/include.jsp" %>
 	<h1>New User Page</h1>
 	<form:form method="GET" commandName="user"
-		action="${pageContext.request.contextPath}/views/home.jsp">
+		action="${pageContext.request.contextPath}/views/home/home.jsp">
 		<table>
 			<tbody>
 				<tr>
