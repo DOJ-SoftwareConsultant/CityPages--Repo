@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds">
+	<contextName>CityPages</contextName>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>CityPages- %date [%thread] %-5level %logger{36} - %message%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!-- <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>../logs/citypages.log</file> <append>true</append> <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+		<fileNamePattern>citypages.%d{yyyy-MM-dd}.log</fileNamePattern> <maxHistory>30</maxHistory> 
+		</rollingPolicy> <encoder> <pattern>%d %5p | %t | %-55logger{55} | %m %n</pattern> 
+		</encoder> </appender> -->
+
+	<logger name="org.springframework" level="ALL" />
+	<logger name="org.springframework.transaction" level="WARN" />
+	<logger name="org.hibernate.type" level="ALL" />
+	<logger name="org.hibernate.tool.hbm2ddl" level="ALL" />
+	<logger name="org.hibernate.sql" level="trace" />
+	<logger name="org.hibernate" level="info" />
+	<logger name="org.springframework.orm.jpa" level="warn" />
+	<logger name="org.springframework.web.servlet.mvc" level="WARN" />
+	<logger name="org.springframework">
+		<level value="INFO" />
+	</logger>
+
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

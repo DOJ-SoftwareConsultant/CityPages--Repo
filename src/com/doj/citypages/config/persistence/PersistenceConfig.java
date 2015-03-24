@@ -6,6 +6,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,11 +21,17 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * @author Rishi Ranjan
+ *
+ */
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:persistence.properties")
 @EnableJpaRepositories(basePackages = "com.doj.citypages.repositories")
 public class PersistenceConfig {
+
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private Environment env;
@@ -35,6 +43,7 @@ public class PersistenceConfig {
 
 	@Bean
 	public DataSource datasource() {
+		
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
 		dataSource.setUrl(env.getProperty("jdbc.url"));
@@ -69,6 +78,7 @@ public class PersistenceConfig {
 	}
 
 	final Properties additionalProperties() {
+		LOGGER.info("setting the hibernate properties");
 		final Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto",
 				env.getProperty("hibernate.hbm2ddl.auto"));

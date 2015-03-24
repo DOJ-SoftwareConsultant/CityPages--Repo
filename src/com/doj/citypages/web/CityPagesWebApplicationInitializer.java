@@ -9,7 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.doj.citypages.web.config.CityPagesMvcConfig;
+import com.doj.citypages.config.web.CityPagesMvcConfig;
 
 /**
  * @author Dinesh.Rajput
