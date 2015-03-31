@@ -15,6 +15,7 @@ import com.doj.citypages.config.web.CityPagesMvcConfig;
  * @author Dinesh.Rajput
  *
  */
+
 public class CityPagesWebApplicationInitializer implements WebApplicationInitializer{
 
 	@Override

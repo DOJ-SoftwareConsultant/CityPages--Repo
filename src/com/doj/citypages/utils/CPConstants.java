@@ -4,6 +4,7 @@ package com.doj.citypages.utils;
  * @author Dinesh.Rajput
  *
  */
+
 public interface CPConstants {
 /*	View part of controller*/
 	

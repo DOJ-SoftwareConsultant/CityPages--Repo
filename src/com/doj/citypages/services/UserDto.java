@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.doj.citypages.validation.PasswordMatches;
 import com.doj.citypages.validation.ValidEmail;
 
+
 @PasswordMatches
 public class UserDto {
 	@NotNull

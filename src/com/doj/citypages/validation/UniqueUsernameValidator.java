@@ -10,6 +10,7 @@ public class UniqueUsernameValidator implements
 	public void initialize(UniqueUsername constraintAnnotation) {
 	}
 
+	
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		// TODO Auto-generated method stub

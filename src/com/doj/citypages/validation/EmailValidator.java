@@ -13,6 +13,7 @@ import javax.validation.ConstraintValidatorContext;
  * @author lenovo
  * 
  */
+
 public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 	private Pattern pattern;
 	private Matcher matcher;

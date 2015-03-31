@@ -8,5 +8,6 @@ import com.doj.citypages.entities.CpuserAccount;
 
 
 public interface UserRepository extends JpaRepository<CpuserAccount, Serializable> {
+	
 	public CpuserAccount findBycpemail(String email);
 }

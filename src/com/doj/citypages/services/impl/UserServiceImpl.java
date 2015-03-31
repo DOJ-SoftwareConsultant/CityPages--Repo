@@ -14,6 +14,7 @@ import com.doj.citypages.services.IUserService;
 import com.doj.citypages.services.UserDto;
 import com.doj.citypages.validation.EmailExistsException;
 
+
 @Service
 @Transactional
 public class UserServiceImpl implements IUserService {

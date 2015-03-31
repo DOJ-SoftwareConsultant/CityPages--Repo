@@ -4,6 +4,7 @@
       <div class="container">
         <div class="page-header">
           <h1>Signup to CityPags</h1>
+          
         </div>
         <div class="row">
           <div class="span6 offset3">
@@ -13,8 +14,7 @@
                 <form:form action="registration" commandName="user" method ="POST" class="form-horizontal form-signin-signup">
                   <form:input path ="firstName" placeholder="First Name"/>
                   <form:errors path ="firstName"/>
-                  
-                 <form:input path="lastName" placeholder="Last Name"/>
+                    <form:input path="lastName" placeholder="Last Name"/>
                  <form:errors path ="lastName"/>
                 <form:input path="email" placeholder="Email"/>
                 <form:errors path ="email"/>

@@ -20,6 +20,7 @@ import javax.validation.Payload;
  * An Annotation to check the valid email.
  * 
  */
+
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = EmailValidator.class)

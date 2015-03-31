@@ -27,7 +27,7 @@ public class MailConfig {
 		super();
 	}
 
-	// beans
+	
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {

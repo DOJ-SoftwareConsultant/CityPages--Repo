@@ -40,6 +40,8 @@ public class RegistrationController {
 	    public RegistrationController() {
 
 	    }
+	    
+	    
 
 	    @RequestMapping(value = CPConstants.SIGNUPPAGE, method = RequestMethod.GET)
 	    public String showRegistrationForm(WebRequest request, Model model) {

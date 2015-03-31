@@ -1,6 +1,7 @@
 <footer>
       <div class="container">
         <div class="row">
+        
 <!--           <div class="span2">
             <h4><i class="icon-star icon-white"></i> Products</h4>
             <nav>

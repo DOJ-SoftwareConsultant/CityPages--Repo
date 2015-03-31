@@ -13,6 +13,7 @@ public class UserValidator implements Validator {
         return UserDto.class.isAssignableFrom(clazz);
     }
 
+    
     @Override
     public void validate(Object obj, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "message.firstName", "Firstname is required.");

@@ -65,6 +65,7 @@ public class CpuserAccount implements Serializable {
 
 	public CpuserAccount() {
 	}
+	
 
 	public int getCpuid() {
 		return this.cpuid;

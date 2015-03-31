@@ -14,6 +14,7 @@ import com.doj.citypages.services.IUserService;
 
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent>{
 	
+	
 	@Autowired
     private IUserService service;
 

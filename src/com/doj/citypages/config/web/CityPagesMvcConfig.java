@@ -26,6 +26,7 @@ import com.doj.citypages.utils.CPConstants;
  * @author Dinesh.Rajput
  * 
  */
+
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = { "com.doj.citypages" })

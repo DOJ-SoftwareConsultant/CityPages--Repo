@@ -14,6 +14,7 @@ public interface IUserService {
 
     void deleteUser(CpuserAccount user);
 
+ 
     void createVerificationTokenForUser(CpuserAccount user, String token);
 
     VerificationToken getVerificationToken(String VerificationToken);
