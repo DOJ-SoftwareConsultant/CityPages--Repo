@@ -1,36 +1,86 @@
 package com.doj.citypages.services.impl;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.doj.citypages.entities.Users;
-import com.doj.citypages.exception.UserNotFoundException;
+import com.doj.citypages.entities.CpuserAccount;
+import com.doj.citypages.entities.Roles;
+import com.doj.citypages.entities.VerificationToken;
 import com.doj.citypages.repositories.UserRepository;
+import com.doj.citypages.repositories.VerificationTokenRepository;
 import com.doj.citypages.services.IUserService;
+import com.doj.citypages.services.UserDto;
+import com.doj.citypages.validation.EmailExistsException;
 
-@Service("userService")
+@Service
 @Transactional
 public class UserServiceImpl implements IUserService {
-
-	@Resource
+	@Autowired
 	private UserRepository userRepository;
 
-	@Transactional
-	public Users create(Users user) {
-		return userRepository.save(user);
+	@Autowired
+	private VerificationTokenRepository tokenRepository;
+
+	/*@Autowired
+	private BCryptPasswordEncoder passwordEncoder;*/
+
+	@Override
+	public CpuserAccount registerNewUserAccount(UserDto accountDto)
+			throws EmailExistsException {
+		if (emailExist(accountDto.getEmail())) {
+			throw new EmailExistsException(
+					"There is an account with that email adress: "
+							+ accountDto.getEmail());
+		}
+		final CpuserAccount cpUser = new CpuserAccount();
+
+		cpUser.setCpfname(accountDto.getFirstName());
+		cpUser.setCplname(accountDto.getLastName());
+		//cpUser.setCppwd(passwordEncoder.encode(accountDto.getPassword()));
+		cpUser.setCppwd(accountDto.getPassword());
+		cpUser.setCpemail(accountDto.getEmail());
+
+		cpUser.setRole(new Roles(Integer.valueOf(1), cpUser));
+		return userRepository.save(cpUser);
 	}
 
-	@Transactional(rollbackFor=UserNotFoundException.class)
-	public Users findUserById(int id) {
-      return userRepository.findOne(id);
+	private boolean emailExist(String email) {
+		CpuserAccount registeredUser = userRepository.findBycpemail(email);
+		if (registeredUser != null) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public Users login(String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public CpuserAccount getUser(String verificationToken) {
+		CpuserAccount CpRegistereduser = tokenRepository.findByToken(
+				verificationToken).getCpuseraccount();
+		return CpRegistereduser;
 	}
+
+	@Override
+	    public void saveRegisteredUser(CpuserAccount CpuserAccount) {
+		userRepository.save(CpuserAccount);
+	    }
+
+	@Override
+	public void deleteUser(CpuserAccount user) {
+		System.out.println(" not implemented this time");
+
+	}
+
+	@Override
+	public void createVerificationTokenForUser(CpuserAccount cpuser, String token) {
+		VerificationToken myToken = new VerificationToken(token, cpuser);
+        tokenRepository.save(myToken);
+	}
+
+	@Override
+	public VerificationToken getVerificationToken(String VerificationToken) {
+        return tokenRepository.findByToken(VerificationToken);
+    }
 
 }

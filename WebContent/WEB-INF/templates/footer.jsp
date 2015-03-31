@@ -1,7 +1,7 @@
 <footer>
       <div class="container">
         <div class="row">
-          <div class="span2">
+<!--           <div class="span2">
             <h4><i class="icon-star icon-white"></i> Products</h4>
             <nav>
               <ul class="quick-links">
@@ -20,10 +20,10 @@
                 <li><a href="all_services.html">All services</a></li>              
               </ul>
             </nav>
-          </div>
+          </div> -->
           <div class="span2">
             <h4><i class="icon-beaker icon-white"></i> About</h4>
-            <nav>
+           <!--  <nav>
               <ul class="quick-links">
                 <li><a href="our_works.html">Our works</a></li>
                 <li><a href="patnerships.html">Patnerships</a></li>
@@ -32,7 +32,7 @@
                 <li><a href="events.html">Events</a></li>
                 <li><a href="blog.html">Blog</a></li>
               </ul>
-            </nav>          
+            </nav> -->          
           </div>
           <div class="span2">
             <h4><i class="icon-thumbs-up icon-white"></i> Support</h4>

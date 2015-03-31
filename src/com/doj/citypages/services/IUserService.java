@@ -1,13 +1,21 @@
 package com.doj.citypages.services;
 
-import com.doj.citypages.entities.Users;
+import com.doj.citypages.entities.CpuserAccount;
+import com.doj.citypages.entities.VerificationToken;
+import com.doj.citypages.validation.EmailExistsException;
 
 public interface IUserService {
-	
-	public Users create(Users user);
 
-	public Users findUserById(int id);
+    CpuserAccount registerNewUserAccount(UserDto accountDto) throws EmailExistsException;
 
-	public Users login(String email, String password);
+    CpuserAccount getUser(String verificationToken);
+
+    void saveRegisteredUser(CpuserAccount user);
+
+    void deleteUser(CpuserAccount user);
+
+    void createVerificationTokenForUser(CpuserAccount user, String token);
+
+    VerificationToken getVerificationToken(String VerificationToken);
 
 }

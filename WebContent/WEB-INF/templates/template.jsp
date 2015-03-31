@@ -1,6 +1,9 @@
 <%@include file="/WEB-INF/templates/include.jsp"%>
+
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +21,7 @@
 <!-- Bootbusiness theme -->
 <link href="css/boot-business.css" rel="stylesheet">
 </head>
+
 <body>
 	<!-- Start: HEADER -->
 	<section id="header">
@@ -28,7 +32,7 @@
 	<!-- Start: MAIN CONTENT -->
 	<section id="body">
 		<!-- Page content -->
-		<tiles:insertAttribute name="body" defaultValue="" />
+		<tiles:insertAttribute name="body" />
 		<!-- End of page content -->
 	</section>
 	<!-- End: MAIN CONTENT -->

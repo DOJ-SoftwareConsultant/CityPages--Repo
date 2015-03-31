@@ -11,22 +11,22 @@
 	
 	<definition name="home" extends="mainTemplate">
 		<put-attribute name="title" value="City Pages For Good and Bad Things : DOJ Software"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/home.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/Home/home.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="signup" extends="mainTemplate">
+	<definition name="signUp" extends="mainTemplate">
 		<put-attribute name="title" value="Sign Up for City Pages : DOJ Software"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/signUp.jsp"></put-attribute>
 	</definition>
 	
-	<definition name="signin" extends="mainTemplate">
-		<put-attribute name="title" value="Sign Ip for City Pages : DOJ Software"></put-attribute>
+	<definition name="signIn" extends="mainTemplate">
+		<put-attribute name="title" value="Sign In for City Pages : DOJ Software"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/signIn.jsp"></put-attribute>
 	</definition>
 	
 	<definition name="about" extends="mainTemplate">
 		<put-attribute name="title" value="About City Pages : DOJ Software"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/about.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/Home/about.jsp"></put-attribute>
 	</definition>
 	
 	

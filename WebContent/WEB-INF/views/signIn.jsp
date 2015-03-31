@@ -1,16 +1,26 @@
+<%@include file="/WEB-INF/templates/include.jsp" %>
 <div class="content">
       <div class="container">
         <div class="page-header">
-          <h1>Signin to Bootbusiness</h1>
+          <h1>Signin to CityPages</h1>
         </div>
         <div class="row">
           <div class="span6 offset3">
-            <h4 class="widget-header"><i class="icon-lock"></i> Signin to Bootbusiness</h4>
+            <h4 class="widget-header"><i class="icon-lock"></i> Signin to Citypages</h4>
             <div class="widget-body">
               <div class="center-align">
-                <form class="form-horizontal form-signin-signup">
-                  <input type="text" name="email" placeholder="Email">
-                  <input type="password" name="password" placeholder="Password">
+              
+                <form:form action="login" commandName="user" method="POST" class="form-horizontal form-signin-signup">
+                  <!-- <input type="text" name="email" placeholder="Email">
+                  <input type="password" name="password" placeholder="Password"> -->
+                   
+                  <form:input path="email" placeholder="Email"/>
+                  <form:errors path="email"/>
+                  
+                   
+                  <form:password path="password" placeholder="Password"/>
+                  <form:errors path="password"/>
+                  
                   <div class="remember-me">
                     <div class="pull-left">
                       <label class="checkbox">
@@ -23,8 +33,9 @@
                     <div class="clearfix"></div>
                   </div>
                   <input type="submit" value="Signin" class="btn btn-primary btn-large">
-                </form>
-                <h4><i class="icon-question-sign"></i> Don't have an account?</h4>
+                </form:form>
+                
+                <!-- <h4><i class="icon-question-sign"></i> Don't have an account?</h4>
                 <a href="signup.html" class="btn btn-large bottom-space">Signup</a>
                 <h4><i class="icon-thumbs-up"></i> Sign in with third party account</h4>
                 <ul class="signin-with-list">
@@ -52,7 +63,7 @@
                       Signin with Github
                     </a>
                   </li>
-                </ul>
+                </ul> -->
               </div>
             </div>
           </div>

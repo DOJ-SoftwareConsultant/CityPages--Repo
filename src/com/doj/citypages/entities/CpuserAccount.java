@@ -52,6 +52,14 @@ public class CpuserAccount implements Serializable {
 	@Column(length = 80)
 	private String cppwd;
 
+	public Roles getRole() {
+		return role;
+	}
+
+	public void setRole(Roles role) {
+		this.role = role;
+	}
+
 	@OneToOne(mappedBy = "cpuseraccount", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Roles role;
 

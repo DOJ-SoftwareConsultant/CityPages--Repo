@@ -1,3 +1,4 @@
+<%@include file="/WEB-INF/templates/include.jsp" %>
 <!-- Start: MAIN CONTENT -->
     <div class="content">
       <div class="container">
@@ -9,20 +10,26 @@
             <h4 class="widget-header"><i class="icon-gift"></i> Be a part of Bootbusiness</h4>
             <div class="widget-body">
               <div class="center-align">
-                <form class="form-horizontal form-signin-signup">
-                  <input type ="text" name ="fname" placeholder="First Name">
-                  <input type ="text" name ="lname" placeholder="Last Name">
-                  <input type="text" name="email" placeholder="Email">
-                  <input type="password" name="password" placeholder="Password">
-                  <input type="password" name="password_confirmation" placeholder="Password Confirmation">
+                <form:form action="registration" commandName="user" method ="POST" class="form-horizontal form-signin-signup">
+                  <form:input path ="firstName" placeholder="First Name"/>
+                  <form:errors path ="firstName"/>
+                  
+                 <form:input path="lastName" placeholder="Last Name"/>
+                 <form:errors path ="lastName"/>
+                <form:input path="email" placeholder="Email"/>
+                <form:errors path ="email"/>
+                  <form:password path="password" placeholder="Password"/>
+                  <form:errors path ="password"/>
+                 <form:password path="matchingPassword" placeholder="Password Confirmation"/>
+                  <form:errors path ="matchingPassword"/> 
                   <div>
                     <input type="submit" value="Signup" class="btn btn-primary btn-large">
-                    <a class="btn btn-primary btn-large" href="signin.html">Signin</a>
+                    <a class="btn btn-primary btn-large" href="login.html">Signin</a>
                     
                   </div>
-                </form>
+                </form:form>
                 
-                <h4><i class="icon-thumbs-up"></i> Sign in with third party account</h4>
+               <!--  <h4><i class="icon-thumbs-up"></i> Sign in with third party account</h4>
                 <ul class="signin-with-list">
                   <li>
                     <a class="btn-twitter">
@@ -43,7 +50,7 @@
                     </a>
                   </li>
                  
-                </ul>
+                </ul> -->
               </div>
             </div>
           </div>

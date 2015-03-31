@@ -15,9 +15,9 @@ public class HomeController {
 		return CPConstants.HOME;
 	}
 	
-	/*@RequestMapping(value = CPConstants.ABOUTPAGE)
+	@RequestMapping(value = CPConstants.ABOUTPAGE)
 	public String aboutUs(Model model) {
 		return CPConstants.ABOUT;
 	}
-*/
+
 }
