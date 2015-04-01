@@ -24,8 +24,8 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	private VerificationTokenRepository tokenRepository;
 
-	/*@Autowired
-	private BCryptPasswordEncoder passwordEncoder;*/
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public CpuserAccount registerNewUserAccount(UserDto accountDto)
@@ -39,11 +39,12 @@ public class UserServiceImpl implements IUserService {
 
 		cpUser.setCpfname(accountDto.getFirstName());
 		cpUser.setCplname(accountDto.getLastName());
-		//cpUser.setCppwd(passwordEncoder.encode(accountDto.getPassword()));
-		cpUser.setCppwd(accountDto.getPassword());
+		cpUser.setCppwd(bCryptPasswordEncoder.encode(accountDto.getPassword()));
+		//cpUser.setCppwd(accountDto.getPassword());
 		cpUser.setCpemail(accountDto.getEmail());
 
 		cpUser.setRole(new Roles(Integer.valueOf(1), cpUser));
+		
 		return userRepository.save(cpUser);
 	}
 
