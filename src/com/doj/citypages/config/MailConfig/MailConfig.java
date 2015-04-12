@@ -15,7 +15,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
-@ComponentScan(basePackages = { "com.doj.citypages" })
+//@ComponentScan(basePackages = { "com.doj.citypages"})
 @PropertySource("classpath:email.properties")
 public class MailConfig {
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
@@ -36,19 +36,18 @@ public class MailConfig {
 
 	@Bean
 	public JavaMailSender javaMailSenderImpl() {
+		System.out.println("i am in java mail");
 		JavaMailSenderImpl mailSenderImpl = new JavaMailSenderImpl();
 		LOGGER.debug("into mail configuration class");
 		mailSenderImpl.setHost(env.getProperty("smtp.host"));
 		mailSenderImpl.setPort(env.getProperty("smtp.port", Integer.class));
 		mailSenderImpl.setProtocol(env.getProperty("smtps.protocol"));
-		mailSenderImpl.setUsername(env.getProperty("support.email"));
+//		mailSenderImpl.setUsername(env.getProperty("support.email"));
 		mailSenderImpl.setPassword(env.getProperty("smtp.password"));
 		mailSenderImpl.setUsername(env.getProperty("smtp.username"));
 
 		Properties properties = new Properties();
-		// properties.setProperty("mail.smtp.host","smtp.gmail.com");
-		// properties.setProperty("mail.smtp.port", "587");
-		// .setProperty("mail.transport.protocol", "smtp");
+		
 		properties.setProperty("mail.smtp.auth", "true");
 		properties.setProperty("mail.smtp.starttls.enable", "true");
 		properties.setProperty("mail.debug", "true");

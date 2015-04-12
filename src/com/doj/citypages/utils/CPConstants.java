@@ -12,7 +12,8 @@ public interface CPConstants {
 	String ABOUT = "about";
 	String REGISTRATION="signUp";
 	String LOGIN="signIn";
-	
+	String SUCCESSREG="successRegister";
+	String TEST="test";
 	
 	/*Url mapping*/
 	
@@ -20,10 +21,11 @@ public interface CPConstants {
 	String ABOUTPAGE = "/about";
 	String SIGNUPPAGE="/registration";
 	String SIGNINPAGE="/login";
-	String TILES = "/WEB-INF/tiles/tiles-def.xml";
+	String REGCONF="/regitrationConfirm";
+	
 	
 	/*Static resources*/
-	
+	String TILES = "/WEB-INF/tiles/tiles-def.xml";
 	String IMAGEROOTURL = "images/";
 	String JSROOTURL = "js/";
 	String CSSROOTURL = "css/";

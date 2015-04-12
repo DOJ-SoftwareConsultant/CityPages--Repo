@@ -24,6 +24,13 @@ public class CityPagesUserDetails implements UserDetails {
 	private static final long serialVersionUID = 653027638824438094L;
 	private CpuserAccount account;
 	private List<? extends GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+	
+	
+
+	public CityPagesUserDetails() {
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	public CityPagesUserDetails(CpuserAccount account, List<? extends GrantedAuthority> authorities) {
 		this.account = account;

@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
@@ -22,7 +21,8 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import com.doj.citypages.utils.CPConstants;
-import com.doj.citypages.web.security.config.CityPageSecurityConfig;
+import com.doj.citypages.validation.EmailValidator;
+import com.doj.citypages.validation.PasswordMatchesValidator;
 
 /**
  * @author Dinesh.Rajput
@@ -32,7 +32,7 @@ import com.doj.citypages.web.security.config.CityPageSecurityConfig;
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = { "com.doj.citypages" })
-@Import({ CityPageSecurityConfig.class })
+// @Import({ CityPageSecurityConfig.class })
 public class CityPagesMvcConfig extends WebMvcConfigurerAdapter {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
@@ -89,6 +89,11 @@ public class CityPagesMvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	
+/*@Bean
+	public UserDetailsService getUserDetailService() {
+		return new CityPagesUserDetailsService();
+	}*/
+	
 	@Bean
 	public LocaleResolver localeResolver() {
 		CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
@@ -102,4 +107,14 @@ public class CityPagesMvcConfig extends WebMvcConfigurerAdapter {
 		configurer.setDefinitions(new String[] { CPConstants.TILES });
 		return configurer;
 	}
+	
+	 @Bean
+	    public EmailValidator usernameValidator() {
+	        return new EmailValidator();
+	    }
+
+	    @Bean
+	    public PasswordMatchesValidator passwordMatchesValidator() {
+	        return new PasswordMatchesValidator();
+	    }
 }

@@ -1,6 +1,7 @@
 package com.doj.citypages.services;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,6 +21,7 @@ public class UserDto {
 
 	@NotNull
 	@NotEmpty
+	@Size(min=6,max=18,message="Password length must be between 6 and 18")
 	private String password;
 
 	@NotNull

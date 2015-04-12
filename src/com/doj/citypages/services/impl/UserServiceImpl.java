@@ -1,5 +1,7 @@
 package com.doj.citypages.services.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,11 @@ import com.doj.citypages.services.IUserService;
 import com.doj.citypages.services.UserDto;
 import com.doj.citypages.validation.EmailExistsException;
 
-
 @Service
 @Transactional
 public class UserServiceImpl implements IUserService {
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -30,6 +33,9 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public CpuserAccount registerNewUserAccount(UserDto accountDto)
 			throws EmailExistsException {
+
+		LOGGER.info("in register new user account");
+
 		if (emailExist(accountDto.getEmail())) {
 			throw new EmailExistsException(
 					"There is an account with that email adress: "
@@ -40,11 +46,11 @@ public class UserServiceImpl implements IUserService {
 		cpUser.setCpfname(accountDto.getFirstName());
 		cpUser.setCplname(accountDto.getLastName());
 		cpUser.setCppwd(bCryptPasswordEncoder.encode(accountDto.getPassword()));
-		//cpUser.setCppwd(accountDto.getPassword());
+
 		cpUser.setCpemail(accountDto.getEmail());
 
 		cpUser.setRole(new Roles(Integer.valueOf(1), cpUser));
-		
+
 		return userRepository.save(cpUser);
 	}
 
@@ -64,25 +70,27 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	    public void saveRegisteredUser(CpuserAccount CpuserAccount) {
+	public void saveRegisteredUser(CpuserAccount CpuserAccount) {
 		userRepository.save(CpuserAccount);
-	    }
+	}
 
 	@Override
 	public void deleteUser(CpuserAccount user) {
 		System.out.println(" not implemented this time");
-
+		userRepository.delete(user);
 	}
 
 	@Override
-	public void createVerificationTokenForUser(CpuserAccount cpuser, String token) {
+	public void createVerificationTokenForUser(CpuserAccount cpuser,
+			String token) {
+		LOGGER.debug("creating verification token");
 		VerificationToken myToken = new VerificationToken(token, cpuser);
-        tokenRepository.save(myToken);
+		tokenRepository.save(myToken);
 	}
 
 	@Override
 	public VerificationToken getVerificationToken(String VerificationToken) {
-        return tokenRepository.findByToken(VerificationToken);
-    }
+		return tokenRepository.findByToken(VerificationToken);
+	}
 
 }

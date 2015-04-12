@@ -11,6 +11,7 @@ public class HomeController {
 	
 	@RequestMapping(value = CPConstants.ROOTPAGE)
 	public String index(Model model) {
+		System.out.println("home");
 		return CPConstants.HOME;
 	}
 	

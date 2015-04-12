@@ -18,6 +18,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.doj.citypages.config.MailConfig.MailConfig;
 import com.doj.citypages.web.config.CityPagesMvcConfig;
 import com.doj.citypages.web.security.config.CityPageSecurityConfig;
 
@@ -29,21 +30,35 @@ public class CityPagesWebApplicationInitializer implements WebApplicationInitial
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		registerListener(servletContext);
-		registerDispatcherServlet(servletContext);
+		 AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+	        rootContext.register(CityPageSecurityConfig.class,CityPagesMvcConfig.class);
+	        servletContext.addListener(new ContextLoaderListener(rootContext));
+	       // AnnotationConfigWebApplicationContext dispatcherServlet = new AnnotationConfigWebApplicationContext();
+	       // dispatcherServlet.register(CityPagesMvcConfig.class);
+	             
+	        // Register and map the dispatcher servlet
+	        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(rootContext));
+	        dispatcher.setLoadOnStartup(1);
+	        dispatcher.addMapping("/");
+		//registerListener(servletContext);
+		//registerDispatcherServlet(servletContext);
 		registerSpringSecurityFilterChain(servletContext);
 		registerOpenEntityManagerInViewFilter(servletContext);
 	}
 	
-	private void registerListener(ServletContext servletContext) {
-		AnnotationConfigWebApplicationContext rootContext;
-        rootContext = createContext(CityPageSecurityConfig.class);
+	/*private void registerListener(ServletContext servletContext) {
+		AnnotationConfigWebApplicationContext rootContext= new AnnotationConfigWebApplicationContext();
+		rootContext.register(CityPageSecurityConfig.class,MailConfig.class);
+    //    rootContext = createContext(CityPageSecurityConfig.class);
         servletContext.addListener(new ContextLoaderListener(rootContext));
-        servletContext.addListener(new RequestContextListener());
+     //   servletContext.addListener(new RequestContextListener());
 
     }
 	
 	private void registerDispatcherServlet(ServletContext servletContext) {
+		 AnnotationConfigWebApplicationContext dispatcherServlet = new AnnotationConfigWebApplicationContext();
+		 dispatcherServlet.register(CityPagesMvcConfig.class);
+		 ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(dispatcherServlet));
 		WebApplicationContext dispatcherContext = createContext(CityPagesMvcConfig.class);
         DispatcherServlet dispatcherServlet = new DispatcherServlet(dispatcherContext);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", dispatcherServlet);
@@ -51,17 +66,17 @@ public class CityPagesWebApplicationInitializer implements WebApplicationInitial
         dispatcher.addMapping("/");
 	}
 	
-	 /**
+	 *//**
      * Factory method to create {@link AnnotationConfigWebApplicationContext} instances. 
      * @param annotatedClasses
      * @return
-     */
+     *//*
     private AnnotationConfigWebApplicationContext createContext(final Class<?>... annotatedClasses) {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.register(annotatedClasses);
         return context;
     }
-    
+*/    
     private void registerSpringSecurityFilterChain(ServletContext servletContext) {
 		FilterRegistration.Dynamic springSecurityFilterChain = servletContext.addFilter(
 				BeanIds.SPRING_SECURITY_FILTER_CHAIN, new DelegatingFilterProxy());

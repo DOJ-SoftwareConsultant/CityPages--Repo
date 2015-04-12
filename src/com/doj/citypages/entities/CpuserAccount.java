@@ -51,6 +51,28 @@ public class CpuserAccount implements Serializable {
 
 	@Column(length = 80)
 	private String cppwd;
+	
+	private boolean enabled;
+
+    private boolean tokenExpired;
+    
+    
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isTokenExpired() {
+		return tokenExpired;
+	}
+
+	public void setTokenExpired(boolean tokenExpired) {
+		this.tokenExpired = tokenExpired;
+	}
 
 	public Roles getRole() {
 		return role;
